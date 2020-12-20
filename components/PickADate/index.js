@@ -4,7 +4,7 @@ import { getDay } from "date-fns"
 
 import "react-datepicker/dist/react-datepicker.css"
 
-const PickADate = () => {
+const PickADate = ({ calendarId }) => {
   const [isCompleted, setIsCompleted] = useState(false)
   const [startDate, setStartDate] = useState(new Date())
   const [selectedPeople, setSelectedPeople] = useState(1)
@@ -17,6 +17,7 @@ const PickADate = () => {
   const handleSelectedPeople = (e) => setSelectedPeople(e.target.value)
   const handleSubmit = async () => {
     const form = {
+      calendarId,
       startDate,
       selectedPeople,
     }

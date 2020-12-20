@@ -14,32 +14,29 @@ export default async (req, res) => {
     subject: process.env.CLIENT_EMAIL,
   })
 
-  const calendarId = process.env.CALENDAR_ID
   const calendar = google.calendar({ version: "v3", auth: client })
 
   const options = {
-    calendarId,
+    calendarId: req.query.id,
     timeMin: new Date().toISOString(),
     timeMax: addWeeks(new Date(), 4).toISOString(), // Let's get events for four weeks
     singleEvents: true,
     orderBy: "startTime",
   }
 
-  const callback = (error, result) => {
+  await calendar.events.list(options, async (error, result) => {
     if (error) {
       console.log(`The API returned an error: ${error}`)
       res.send(error.message)
+    } else {
+      const appointments = await result?.data?.items.map((appointment) => ({
+        start: appointment.start.dateTime || appointment.start.date,
+        end: appointment.end.dateTime || appointment.end.date,
+        id: appointment.id,
+        description: appointment.description,
+      }))
+
+      res.send(appointments)
     }
-
-    const appointments = result.data.items.map((appointment) => ({
-      start: appointment.start.dateTime || appointment.start.date,
-      end: appointment.end.dateTime || appointment.end.date,
-      id: appointment.id,
-      description: appointment.description,
-    }))
-
-    res.send(appointments)
-  }
-
-  await calendar.events.list(options, callback)
+  })
 }

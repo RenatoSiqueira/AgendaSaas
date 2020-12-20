@@ -1,18 +1,12 @@
 import React from "react"
-import { useRouter } from "next/router"
 
 import PageTitle from "../components/PageTitle"
-import PickADate from "../components/PickADate"
+import Landing from "../layout/Landing"
 
-const Index = () => {
-  const router = useRouter()
-  console.log("1", router)
-  return (
-    <>
-      <PageTitle title="Seja Bem Vindo - Agenda Saas" />
-      <PickADate />
-    </>
-  )
-}
+const Index = () => (
+  <Landing>
+    <PageTitle title="Seja Bem Vindo - Agenda Saas" />
+  </Landing>
+)
 
 export default Index
