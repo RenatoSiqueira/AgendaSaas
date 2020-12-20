@@ -24,11 +24,20 @@ const HeaderClient = ({ name, slug, calendarId }) => (
         </svg>
       </a>
       <div className="inline-flex items-center h-full ml-5 lg:w-2/5 lg:justify-end lg:ml-0">
-        <Link href={`/agendamentos/${calendarId}`}>
-          <a className="px-4 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-teal-500 rounded shadow outline-none active:bg-teal-600 hover:shadow-md focus:outline-none ease">
-            Ver Agendamentos
-          </a>
-        </Link>
+        {calendarId && (
+          <Link href={`/agendamentos/${calendarId}`}>
+            <a className="px-4 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-teal-500 rounded shadow outline-none active:bg-teal-600 hover:shadow-md focus:outline-none ease">
+              Ver Agendamentos
+            </a>
+          </Link>
+        )}
+        {!calendarId && (
+          <Link href={`/${slug}`}>
+            <a className="px-4 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-teal-500 rounded shadow outline-none active:bg-teal-600 hover:shadow-md focus:outline-none ease">
+              Agendar Horário
+            </a>
+          </Link>
+        )}
       </div>
     </div>
   </header>

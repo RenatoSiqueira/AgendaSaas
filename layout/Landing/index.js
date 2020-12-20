@@ -5,13 +5,12 @@ import Navbar from "./Navbar"
 import Footer from "./Footer"
 import Description from "./Description"
 import CallToAction from "./CallToAction"
-import Clients from "./Clients"
 
-const Index = () => (
+const Index = ({ children }) => (
   <>
     <Navbar />
     <Hero />
-    <Clients />
+    {children}
     <CallToAction />
     <Description />
     <Footer />

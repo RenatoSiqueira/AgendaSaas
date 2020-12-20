@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 
-import Header from "../../components/Header/headerClient"
+import { useClient } from "../../lib/context"
+
+import Header from "../../components/Header"
 import PickADate from "../../components/PickADate"
 import PageTitle from "../../components/PageTitle"
 
@@ -9,8 +11,8 @@ import Layout from "../../layout/Client"
 
 const Index = () => {
   const router = useRouter()
+  const { name, calendar, slug, setDados } = useClient()
   const [isLoading, setIsLoading] = useState(true)
-  const [client, setClient] = useState("")
 
   useEffect(async () => {
     if (router.query.client) {
@@ -22,7 +24,7 @@ const Index = () => {
       )
       if (findClient.length > 0) {
         const { name, calendar, slug } = findClient[0]
-        setClient({ name, calendar, slug })
+        setDados({ name, calendar, slug })
         setIsLoading(false)
       } else {
         router.push("/")
@@ -33,13 +35,9 @@ const Index = () => {
   if (!isLoading) {
     return (
       <Layout>
-        <PageTitle title={`${client.name} - Agenda Saas`} />
-        <Header
-          name={client.name}
-          slug={client.slug}
-          calendarId={client.calendar}
-        />
-        <PickADate calendarId={client.calendar} />
+        <PageTitle title={`${name} - Agenda Saas`} />
+        <Header name={name} slug={slug} calendarId={calendar} />
+        <PickADate calendarId={calendar} />
       </Layout>
     )
   }
