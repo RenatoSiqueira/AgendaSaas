@@ -29,7 +29,10 @@ const Index = () => {
         <div className="container px-5 py-12 mx-auto">
           <div className="flex flex-wrap -m-4">
             {!isLoading &&
-              listClients.map((client, i) => <Client key={i} {...client} />)}
+              listClients.map((client, i) => {
+                const parseData = JSON.parse(client.perfilConfs)
+                return <Client key={i} img={parseData.img} {...client} />
+              })}
           </div>
         </div>
       </section>

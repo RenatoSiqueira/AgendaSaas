@@ -1,13 +1,16 @@
 import React from "react"
 import Link from "next/link"
+import Image from "next/image"
 
-const Client = ({ slug, name }) => (
+const Client = ({ slug, name, img }) => (
   <div className="p-4 md:w-1/3">
     <div className="h-full border-2 border-gray-200 rounded-lg overflow-hidden">
-      <img
+      <Image
         className="lg:h-48 md:h-36 w-full object-cover object-center"
-        src="https://source.unsplash.com/collection/1256986/720x400"
-        alt="Professionals"
+        src={`/${img}`}
+        alt={name}
+        width={384}
+        height={192}
       />
       <div className="p-6">
         <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
