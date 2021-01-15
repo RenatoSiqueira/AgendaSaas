@@ -16,17 +16,18 @@ const Footer = () => (
         >
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
         </svg>
-        <span className="ml-3 text-xl">tailblocks</span>
+        <span className="ml-3 text-xl">Agenda Saas</span>
       </a>
       <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-        © 2020 tailblocks —
+        © 2020 Utilizando: TaildwindCss, NextJs, Google Spreadsheet, Google
+        Calendar, Vercel
         <a
-          href="https://twitter.com/knyttneve"
+          href="https://github.com/renatosiqueira"
           className="text-gray-600 ml-1"
           rel="noopener noreferrer"
           target="_blank"
         >
-          @knyttneve
+          @RenatoSiqueira
         </a>
       </p>
       <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">

@@ -1,13 +1,23 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import DatePicker from "react-datepicker"
 import { getDay } from "date-fns"
 
 import "react-datepicker/dist/react-datepicker.css"
 
+import { useClient } from "../../lib/context"
+
 const PickADate = ({ calendarId }) => {
   const [isCompleted, setIsCompleted] = useState(false)
   const [startDate, setStartDate] = useState(new Date())
   const [selectedPeople, setSelectedPeople] = useState(1)
+
+  const [perfil, setPerfil] = useState({})
+  const { perfilConfs } = useClient()
+
+  useEffect(() => {
+    const configs = JSON.parse(perfilConfs)
+    setPerfil(configs)
+  }, [])
 
   const isWeekday = (date) => {
     const day = getDay(date)
@@ -38,10 +48,12 @@ const PickADate = ({ calendarId }) => {
 
   return (
     <div className="flex justify-center items-center m-auto mt-20 mb-20 w-full bg-white">
-      <div className="flex flex-col pt-40 pb-40 lg:flex-row lg:w-7/12 xl:w-7/12 xl:flex-row justify-center items-center w-11/12 h-32 rounded-md bg-indigo-500">
+      <div
+        className={`flex flex-col pt-40 pb-40 lg:flex-row lg:w-7/12 xl:w-7/12 xl:flex-row justify-center items-center w-11/12 h-32 rounded-md ${perfil.back}`}
+      >
         {isCompleted && (
           <div className="flex flex-col p-2 lg:p-4 xl:p-4">
-            <h3 className="text-2xl font-extrabold text-white">
+            <h3 className={`text-2xl font-extrabold ${perfil.text}`}>
               Horário Agendado.
             </h3>
             <p className="ml-1 text-sm text-indigo-200">Obrigado</p>
@@ -49,7 +61,7 @@ const PickADate = ({ calendarId }) => {
         )}
         {!isCompleted && (
           <div className="flex flex-col p-2 lg:p-4 xl:p-4">
-            <h3 className="text-2xl font-extrabold text-white">
+            <h3 className={`text-2xl font-extrabold ${perfil.text}`}>
               Faça uma Reserva
             </h3>
             <p className="ml-1 text-sm text-indigo-200">Agende seu Horário</p>
@@ -78,7 +90,7 @@ const PickADate = ({ calendarId }) => {
                 <option value={4}>4 Pessoas</option>
               </select>
               <button
-                className="w-32 h-10 mt-4 w-full text-sm font-extrabold text-white bg-blue-400 rounded-md hover:bg-blue-500"
+                className={`w-32 h-10 mt-4 w-full text-sm font-extrabold ${perfil.text} ${perfil.btColor}-400 rounded-md hover:${perfil.btColor}-500`}
                 onClick={handleSubmit}
               >
                 Agendar!

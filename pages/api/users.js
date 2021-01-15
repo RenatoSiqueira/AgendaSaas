@@ -18,6 +18,7 @@ export default async (req, res) => {
         slug: e.Slug,
         name: e.Cliente,
         calendar: e.Calendar,
+        perfilConfs: e.Perfil,
       }
     })
     res.send(clients)

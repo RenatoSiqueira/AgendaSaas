@@ -11,7 +11,7 @@ import Layout from "../../layout/Client"
 
 const Index = () => {
   const router = useRouter()
-  const { name, calendar, slug, setDados } = useClient()
+  const { name, calendar, setDados } = useClient()
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(async () => {
@@ -23,8 +23,8 @@ const Index = () => {
         (client) => client.slug === router.query.client
       )
       if (findClient.length > 0) {
-        const { name, calendar, slug } = findClient[0]
-        setDados({ name, calendar, slug })
+        const { name, calendar, slug, perfilConfs } = findClient[0]
+        setDados({ name, calendar, slug, perfilConfs })
         setIsLoading(false)
       } else {
         router.push("/")
@@ -36,7 +36,7 @@ const Index = () => {
     return (
       <Layout>
         <PageTitle title={`${name} - Agenda Saas`} />
-        <Header name={name} slug={slug} calendarId={calendar} />
+        <Header />
         <PickADate calendarId={calendar} />
       </Layout>
     )
